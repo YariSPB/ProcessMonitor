@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Cors;
-using System.Web.Http.SelfHost;
+using System.Net.Http;
+using Microsoft.Owin.Hosting;
 
 
 namespace ProcessMonitor
@@ -14,20 +9,20 @@ namespace ProcessMonitor
     {
         static void Main(string[] args)
         {
-            //var config = new HttpSelfHostConfiguration("http:\//localhost:8080");
-            var config = new HttpSelfHostConfiguration("http://127.0.0.1:8080/");
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
-            config.Routes.MapHttpRoute(
-                "API Default", "api/{controller}/{id}",
-                new { id = RouteParameter.Optional });
-            
+            string baseAddress = "http://127.0.0.1:8080";
 
-            using (HttpSelfHostServer server = new HttpSelfHostServer(config))
-            {
-                server.OpenAsync().Wait();
+            // Start OWIN host 
+            using (WebApp.Start<Startup>(url: baseAddress))
+            {           
+                HttpClient client = new HttpClient();
+                var response = client.GetAsync(baseAddress + "/api/process/").Result;
+
+                Console.WriteLine(response);
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+
                 Console.WriteLine("Press Enter to quit.");
                 Console.ReadLine();
+
             }
         }
     }
