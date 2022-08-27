@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Web.Http;
 using ProcessMonitor.Models;
 
@@ -6,13 +7,16 @@ namespace ProcessMonitor
 {
     public class ProcessController : ApiController
     {
-        private ProcessInfo process = new ProcessInfo { Id = 5, Name = "Tomato Soup" };
+        private ProcessInfo process1 = new ProcessInfo { Id = 1, Name = "Tomato Soup1" };
+        private ProcessInfo process2 = new ProcessInfo { Id = 2, Name = "Tomato Soup2" };
 
 
         // GET api/values 
-        public ProcessInfo Get()
+        public IEnumerable<ProcessInfo> Get()
         {
-            return process;
+            var processLIst = new ProcessInfo[] { process1, process2 };
+
+            return processLIst;
         }
     }
 }
