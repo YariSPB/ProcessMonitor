@@ -35,8 +35,8 @@ namespace ProcessMonitor
         private void FetchProcesses(Object source, ElapsedEventArgs e)
         {
             ++count;
-            ProcessInfo process1 = new ProcessInfo { Id = 1, Name = "V. "+ count + " soup1" };
-            ProcessInfo process2 = new ProcessInfo { Id = 2, Name = "V. "+ count + " soup2" };
+            //ProcessInfo process1 = new ProcessInfo { Id = 1, Name = "V. "+ count + " soup1" };
+            //ProcessInfo process2 = new ProcessInfo { Id = 2, Name = "V. "+ count + " soup2" };
             // var result = new ProcessInfo[] { process1, process2 };
             var result = processMonitor.GetRunningProcesses();
             processReportStack.Clear();

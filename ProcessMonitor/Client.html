@@ -16,21 +16,6 @@
 
   <h2>Process table:</h2>
   <table id="tbl_id">
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Memory use</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Notepad</td>
-      <td>5%</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Starcraft</td>
-      <td>10%</td>
-    </tr>
   </table>
 
 
@@ -45,11 +30,16 @@
     function updateProcessesData() {
       function updateProcessTable(json) {
         function getProcessMarkup(record) {
-          return '<tr> <td>' + record.Id + '</td>' + '<td>' + record.Name + '</td></tr>'
+          return '<tr>'
+            +' <td>' + record.Id + '</td>'
+            + '<td>' + record.Name + '</td>'
+            + '<td>' + record.MemoryMbyte + '</td>'
+            +'</tr>'
         }
 
         processTable = $("#tbl_id");
         processTable.empty();
+        processTable.append('<tr><th>Id</th><th>Name</th><th>Memory MBytes</th></tr>');
         for (let i = 0; i < json.length; i++) {
           let record = json[i];
           markup = getProcessMarkup(record);
