@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessMonitor.cs" />
     <Compile Include="ProcessReportingService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\ProcessInfo.cs" />
