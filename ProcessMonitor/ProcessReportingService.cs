@@ -2,6 +2,7 @@
 using ProcessMonitor.Models;
 using System.Timers;
 using System.Threading;
+using System.Configuration;
 
 namespace ProcessMonitor
 {
@@ -17,7 +18,7 @@ namespace ProcessMonitor
 
         private ProcessReportingService()
         {
-            updateFrequency = 10;
+            updateFrequency = Int32.Parse(ConfigurationManager.AppSettings["reportUpdateFrequencySecond"]);
             processMonitor = new ProcessMonitor();
             MonitorProcesses();
         }
