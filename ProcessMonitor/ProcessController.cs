@@ -8,8 +8,7 @@ namespace ProcessMonitor
     {
         public ProcessReport Get(string id)
         {
-            var processReport = ProcessReportingService.Instance.GetProcessesReport(id);
-
+            var processReport = ProcessReportingService.Instance.ReadLatestProcessesReport(id);
             return processReport;
         }
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic; 
 using ProcessMonitor.Models;
 using System.Timers;
 using System.Threading;
@@ -10,10 +8,10 @@ namespace ProcessMonitor
     public class ProcessReportingService
     {
         public readonly static ProcessReportingService Instance = new ProcessReportingService();
-        private ConcurrentStack<ProcessReport> reportStack = new ConcurrentStack<ProcessReport>();
-        //private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        private ReaderWriterLockSlim reportLock = new ReaderWriterLockSlim();
+        private ProcessReport latestProcessReport;
 
-        private int updateFrequency;
+        private readonly int updateFrequency;
         private ProcessMonitor processMonitor;
         int count = 0;
 
@@ -24,22 +22,28 @@ namespace ProcessMonitor
             MonitorProcesses();
         }
 
-        public ProcessReport GetProcessesReport()
-        {
-            ProcessReport processReport;
-            reportStack.TryPeek(out processReport);
-            return processReport;
-        }
 
-        public ProcessReport GetProcessesReport(string prevReportToken)
+        public ProcessReport ReadLatestProcessesReport(string prevReportToken)
         {
             ProcessReport processReport;
-            reportStack.TryPeek(out processReport);
-            if (processReport == null || processReport.ReportToken == prevReportToken)
+            reportLock.EnterReadLock();
+            try
             {
-                return null;
+                if (latestProcessReport == null || latestProcessReport.ReportToken == prevReportToken)
+                {
+                    processReport = null;
+                }
+                else
+                {
+                    processReport = latestProcessReport;
+                }
             }
-            return processReport;
+            finally
+            {
+                reportLock.ExitReadLock();
+            }
+
+            return processReport;       
         }
 
         private void MonitorProcesses()
@@ -47,21 +51,31 @@ namespace ProcessMonitor
             SetTimer();
         }
 
-        private void FetchProcessesReport(Object source, ElapsedEventArgs e)
+
+        private void WriteProcessesReport(Object source, ElapsedEventArgs e)
         {
-            ++count;
-            var result = processMonitor.GetProcessReport();
-            reportStack.Clear();
-            reportStack.Push(result);
-            Console.WriteLine("version " + count);
+            var newestProcessReport = processMonitor.GetProcessReport();
+            reportLock.EnterWriteLock();
+            try
+            {
+                latestProcessReport = newestProcessReport;
+                ++count;
+                Console.WriteLine("New version of process report available: " + count);
+            }
+            finally
+            {
+                reportLock.ExitWriteLock();
+            }
+
         }
+
 
         private void SetTimer()
         {
             // Create a timer with a two second interval.
             var aTimer = new System.Timers.Timer(updateFrequency*1000);
             // Hook up the Elapsed event for the timer. 
-            aTimer.Elapsed += FetchProcessesReport;
+            aTimer.Elapsed += WriteProcessesReport;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
         }
