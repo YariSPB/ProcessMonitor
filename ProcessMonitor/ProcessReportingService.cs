@@ -11,10 +11,9 @@ namespace ProcessMonitor
         public readonly static ProcessReportingService Instance = new ProcessReportingService();
         private ReaderWriterLockSlim reportLock = new ReaderWriterLockSlim();
         private ProcessReport latestProcessReport;
-
         private readonly int updateFrequency;
         private ProcessMonitor processMonitor;
-        int count = 0;
+        private int count = 0;
 
         private ProcessReportingService()
         {

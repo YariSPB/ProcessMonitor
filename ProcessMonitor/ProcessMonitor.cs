@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ProcessMonitor.Models;
 using System.Diagnostics;
 using System.Linq;
