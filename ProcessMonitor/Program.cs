@@ -11,7 +11,7 @@ namespace ProcessMonitor
         {
             string baseAddress = ConfigurationManager.AppSettings["baseAddress"];
 
-            // Start OWIN host 
+            // Start OWIN host with WEB API 2
             using (WebApp.Start<Startup>(url: baseAddress))
             {           
                 Console.WriteLine("Press Enter to quit.");

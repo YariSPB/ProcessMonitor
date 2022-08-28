@@ -17,8 +17,8 @@ namespace ProcessMonitor
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = "abc" }
+                routeTemplate: "api/{controller}/{processReportToken}",
+                defaults: new { processReportToken = "abc" }
             );
 
 

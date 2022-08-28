@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace ProcessMonitor
 {
+    // ProcessMonitor is directly responsible for accessing the System and generating Running Processes' Reports.
     class ProcessMonitor
     {
+        // GetProcessReport collects relevant data about running processes and generates a Process Report.
         public ProcessReport GetProcessReport()
         {
             Process[] processes = Process.GetProcesses();
