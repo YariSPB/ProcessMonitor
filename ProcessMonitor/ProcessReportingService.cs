@@ -10,7 +10,6 @@ namespace ProcessMonitor
     public class ProcessReportingService
     {
         public readonly static ProcessReportingService Instance = new ProcessReportingService();
-        private ConcurrentStack<IEnumerable<ProcessInfo>> processReportStack = new ConcurrentStack<IEnumerable<ProcessInfo>>();
         private ConcurrentStack<ProcessReport> reportStack = new ConcurrentStack<ProcessReport>();
         //private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
 
@@ -24,13 +23,6 @@ namespace ProcessMonitor
             MonitorProcesses();
         }
 
-        public IEnumerable<ProcessInfo> GetRunningProcesses()
-        {
-            IEnumerable<ProcessInfo> result;
-            processReportStack.TryPeek(out result);
-            return result;
-        }
-
         public ProcessReport GetProcessesReport()
         {
             ProcessReport processReport;
@@ -41,15 +33,6 @@ namespace ProcessMonitor
         private void MonitorProcesses()
         {
             SetTimer();
-        }
-
-        private void FetchProcesses(Object source, ElapsedEventArgs e)
-        {
-            ++count;
-            var result = processMonitor.GetRunningProcesses();
-            processReportStack.Clear();
-            processReportStack.Push(result);
-            Console.WriteLine("version " + count);
         }
 
         private void FetchProcessesReport(Object source, ElapsedEventArgs e)

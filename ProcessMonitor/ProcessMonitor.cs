@@ -8,24 +8,6 @@ namespace ProcessMonitor
 {
     class ProcessMonitor
     {
-        public IEnumerable<ProcessInfo> GetRunningProcesses()
-        {
-            Process[] processes = Process.GetProcesses();
-            List<ProcessInfo> processInfo = new List<ProcessInfo>();
-            foreach (Process process in processes)
-            {
-                var processRecord = new ProcessInfo
-                {
-                    Id = process.Id,
-                    Name = process.ProcessName,
-                    MemoryMbyte = process.WorkingSet64 / 1024/1024
-                };
-                processInfo.Add(processRecord);
-            }
-
-            return processInfo.OrderByDescending(o => o.MemoryMbyte).ToList();
-        }
-
         public ProcessReport GetProcessReport()
         {
             Process[] processes = Process.GetProcesses();
