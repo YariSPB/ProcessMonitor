@@ -14,12 +14,6 @@ namespace ProcessMonitor
             // Start OWIN host 
             using (WebApp.Start<Startup>(url: baseAddress))
             {           
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync(baseAddress + "/api/process/").Result;
-
-                Console.WriteLine(response);
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-
                 Console.WriteLine("Press Enter to quit.");
                 Console.ReadLine();
 
