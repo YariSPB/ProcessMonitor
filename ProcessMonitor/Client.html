@@ -25,7 +25,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     var uri = 'http://127.0.0.1:8080/api/process';
-    var updateFrequency = 5000;
+    var updateFrequency = 500;
+    var reportToken = "";
 
     function updateProcessesData() {
       function updateProcessTable(json) {
@@ -51,7 +52,9 @@
       $.getJSON(uri, function (data) {
         console.log(data);
         if (!jQuery.isEmptyObject(data)) {
-          updateProcessTable(data);
+          reportToken = data.ReportToken;
+          console.log(reportToken);
+          updateProcessTable(data.ProcessRecords);
           console.log('Another update');
         } else{
           console.log('Another update: Nothing to update. Do nothing');
@@ -71,19 +74,8 @@
     $(document).ready(function () {
 
       setInterval(updateProcessesData, updateFrequency);
-
-      // Send an AJAX request
-     /* $.getJSON(uri, function (data) {
-        console.log(data);
-        if (!jQuery.isEmptyObject(data)) {
-          updateProcessTable(data);
-        }
-      }); */
     });
 
-    function formatItem(item) {
-      return item.Id + ': $' + item.Name;
-    }
 
   </script>
 </body>

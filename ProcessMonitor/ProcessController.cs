@@ -8,10 +8,15 @@ namespace ProcessMonitor
     public class ProcessController : ApiController
     {
 
-        public IEnumerable<ProcessInfo> Get()
+       /* public IEnumerable<ProcessInfo> Get()
         {
             var processList = ProcessReportingService.Instance.GetRunningProcesses();
-            return processList;
+            re */
+
+        public ProcessReport Get()
+        {
+            var processReport = ProcessReportingService.Instance.GetProcessesReport();
+            return processReport;
         }
     }
 }
