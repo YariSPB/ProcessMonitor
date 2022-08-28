@@ -18,7 +18,7 @@ namespace ProcessMonitor
                 {
                     Id = process.Id,
                     Name = process.ProcessName,
-                    MemoryMbyte = process.WorkingSet64 / 1024 / 1024
+                    MemoryMbyte = (double) process.WorkingSet64 / 1024 / 1024
                 };
                 processInfo.Add(processRecord);
             }

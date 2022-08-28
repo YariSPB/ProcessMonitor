@@ -34,7 +34,7 @@
           return '<tr>'
             +' <td>' + record.Id + '</td>'
             + '<td>' + record.Name + '</td>'
-            + '<td>' + record.MemoryMbyte + '</td>'
+            + '<td>' + Number(record.MemoryMbyte).toFixed(2);   + '</td>'
             +'</tr>'
         }
 
