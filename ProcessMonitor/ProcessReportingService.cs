@@ -6,19 +6,23 @@ using System.Configuration;
 
 namespace ProcessMonitor
 {
-    // ProcessReportingService manages process monitoring information.
+    // ProcessReportingService manages a collection of processes' monitoring information.
     // It is a Singleton which is designed to support concurrent use of a shared resource by multiple Requests. Dependency injection not used for sake of brevity.
     // Consumer-Producer pattern separates generation and consumption of process monitoring information and supports concurrent Read/Write operations.
     public class ProcessReportingService
     {
         public readonly static ProcessReportingService Instance = new ProcessReportingService();
+
         // ReaderWriterLockSlim is used to provide concurrent Read/Write access to a Report Repository
         private ReaderWriterLockSlim reportLock = new ReaderWriterLockSlim();
+
         // (Report Repository) latestProcessReport holds only the latest version of a ProcessReport.
         private ProcessReport latestProcessReport;
         private readonly int updateFrequency;
+
         // ProcessMonitor builds actual Process Reports. 
         private ProcessMonitor processMonitor;
+
         // report version counter, auxiliary information
         private int count = 0;
 

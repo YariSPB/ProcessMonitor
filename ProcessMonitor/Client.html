@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Product App</title>
+  <title>Process Monitoring Information</title>
   <style>
     table,
     th,
@@ -14,7 +14,7 @@
 
 <body>
 
-  <h2>Process table:</h2>
+  <h2>Process Monitoring Information</h2>
   <table id="tbl_id">
   </table>
 
@@ -28,8 +28,13 @@
     var updateFrequency = 2000;
     var reportToken = "abc";
 
+    // Obtains latest Process Monitoring Report from the server
     function updateProcessesData() {
+
+      // Extracts JSON data to update Process Monitoring Table
       function updateProcessTable(json) {
+
+        // Adapts JSON data into table rows format
         function getProcessMarkup(record) {
           return '<tr>'
             +' <td>' + record.Id + '</td>'
@@ -48,9 +53,10 @@
         }
       }
 
-      // Send an AJAX request
+      // Obtains latest ProcessReport from the server.
+      // Ignores same as previosly obtained report by testing for token value
       $.getJSON(uri+reportToken, function (data) {
-        if (!jQuery.isEmptyObject(data)) {
+        if (!jQuery.isEmptyObject(data) || data.ReportToken != reportToken) {
           reportToken = data.ReportToken;
           console.log("New Unique Report Token obtained: " + reportToken);
           updateProcessTable(data.ProcessRecords);

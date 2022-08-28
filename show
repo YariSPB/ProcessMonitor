@@ -1,0 +1,119 @@
+[33mcommit a347fc5120b3091f45fcc2c888bccb710dc4f9b7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 13:44:53 2022 +1100
+
+    Comments annotation added
+
+[33mcommit 2c2fd7c7206b92a40714b64eb2bf42edc12f98e6[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 13:04:34 2022 +1100
+
+    moved base address to app config. plus clean up
+
+[33mcommit fdf68903482a4f5570f967712784f23c3b23ab0f[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 12:59:52 2022 +1100
+
+    clean up in program.cs
+
+[33mcommit 78dac6fcec56ab8997beb8d25769045a68305ebd[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 12:58:29 2022 +1100
+
+    process report frequency setup via app config
+
+[33mcommit 9de27449e70d411b38ab26d51281aa41322bf38b[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 12:43:15 2022 +1100
+
+    memory use output in double
+
+[33mcommit 2a3f591d1c6176a28897590f050517c8283729ae[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 12:40:08 2022 +1100
+
+    Implemented ReaderWriterLockSlim to manage ConsumerProducer interaction in ProcessReportingService
+
+[33mcommit 56fa56ee15d77c5455076d1584dcf955398bfafe[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 12:05:59 2022 +1100
+
+    Client and server ignore requests for ProcessReports which have been obtained previosly.
+
+[33mcommit 359314cc84000ff1810a84ade389deecabbc0bb5[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 11:05:24 2022 +1100
+
+    clean up
+
+[33mcommit c130273bb45936008262483f55daee6a4a9960ca[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sun Aug 28 11:03:03 2022 +1100
+
+    Introduced Process Report which also contain unique per report Token, which is delivered also to a client
+
+[33mcommit 320848dfc3a74b1b49748724589186da87f8a72b[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 22:14:30 2022 +1100
+
+    Able to collect Memory used by processes.
+
+[33mcommit 8d29a97f46ae39f6f9329a954c1e666a3a4f36f4[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 20:12:34 2022 +1100
+
+    ProcessMonitorServices is able to collect actual running processes information in real time. Raw
+
+[33mcommit 5afdfa533979d5fea0c7ae8d560f612dc7f4f70c[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 19:42:10 2022 +1100
+
+    Established periodical process data collection (dummy) with ProducerConsumer pattern via ConcurrentStack<T>
+
+[33mcommit 4194fbb1f4fad594046a61ec56f4a7a86783908f[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 12:03:32 2022 +1100
+
+    Client obtains process data with time frequency and updates the Process table
+
+[33mcommit ea2f80a36c783e41f476c65dd13cc718e60a5b22[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 11:37:13 2022 +1100
+
+    Client can request list of some data from the server and place it into HTML table. Raw.
+
+[33mcommit 81a3d0c5d1c983084f5ce6d2d5594f5e82623843[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 10:52:05 2022 +1100
+
+    Client - Server communication established, raw.
+
+[33mcommit 7449b326b84e5ead119cb47e985fb25a9cb84bda[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Sat Aug 27 10:25:01 2022 +1100
+
+    Before switching to Owin
+
+[33mcommit c051c66cdfb5fa5fc2db0425bf0c052171c0e9db[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Fri Aug 26 22:07:57 2022 +1100
+
+    WebApiSelfHost package installed
+
+[33mcommit e715b1f86d668a3e375c977b61ed284adb31285f[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Fri Aug 26 21:51:48 2022 +1100
+
+    Console hello
+
+[33mcommit 8b2ccbca3f731629b42dcb3bccf142ed1856441e[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Fri Aug 26 21:45:29 2022 +1100
+
+    Add project files.
+
+[33mcommit 15c61aa6bcd1b65957d381ddf4b4c3c554747c2f[m
+Author: YarPas <y.paslavskiy@gmail.com>
+Date:   Fri Aug 26 21:45:27 2022 +1100
+
+    Add .gitignore and .gitattributes.
