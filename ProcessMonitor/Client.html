@@ -24,9 +24,9 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    var uri = 'http://127.0.0.1:8080/api/process';
-    var updateFrequency = 500;
-    var reportToken = "";
+    var uri = 'http://127.0.0.1:8080/api/process/';
+    var updateFrequency = 2000;
+    var reportToken = "abc";
 
     function updateProcessesData() {
       function updateProcessTable(json) {
@@ -49,30 +49,21 @@
       }
 
       // Send an AJAX request
-      $.getJSON(uri, function (data) {
-        console.log(data);
+      $.getJSON(uri+reportToken, function (data) {
         if (!jQuery.isEmptyObject(data)) {
           reportToken = data.ReportToken;
-          console.log(reportToken);
+          console.log("New Unique Report Token obtained: " + reportToken);
           updateProcessTable(data.ProcessRecords);
-          console.log('Another update');
+          console.log('Successfull update');
         } else{
-          console.log('Another update: Nothing to update. Do nothing');
+          console.log('Nothing to update. Do nothing');
         }
       });
 
     }
 
-    var dummy = {
-      "processes": [
-        { "Id": "1", "Name": "Visual Studio" },
-        { "Id": "2", "Name": "Chrome Browser" },
-        { "Id": "3", "Name": "Starcraft" }
-      ]
-    };
 
     $(document).ready(function () {
-
       setInterval(updateProcessesData, updateFrequency);
     });
 

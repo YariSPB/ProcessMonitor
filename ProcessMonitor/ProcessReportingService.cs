@@ -13,12 +13,13 @@ namespace ProcessMonitor
         private ConcurrentStack<ProcessReport> reportStack = new ConcurrentStack<ProcessReport>();
         //private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
 
-        private int updateFrequency = 2;
+        private int updateFrequency;
         private ProcessMonitor processMonitor;
         int count = 0;
 
         private ProcessReportingService()
         {
+            updateFrequency = 10;
             processMonitor = new ProcessMonitor();
             MonitorProcesses();
         }
@@ -27,6 +28,17 @@ namespace ProcessMonitor
         {
             ProcessReport processReport;
             reportStack.TryPeek(out processReport);
+            return processReport;
+        }
+
+        public ProcessReport GetProcessesReport(string prevReportToken)
+        {
+            ProcessReport processReport;
+            reportStack.TryPeek(out processReport);
+            if (processReport == null || processReport.ReportToken == prevReportToken)
+            {
+                return null;
+            }
             return processReport;
         }
 

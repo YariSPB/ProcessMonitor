@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using System.Web.Http;
 using ProcessMonitor.Models;
 
@@ -7,9 +6,10 @@ namespace ProcessMonitor
 {
     public class ProcessController : ApiController
     {
-        public ProcessReport Get()
+        public ProcessReport Get(string id)
         {
-            var processReport = ProcessReportingService.Instance.GetProcessesReport();
+            var processReport = ProcessReportingService.Instance.GetProcessesReport(id);
+
             return processReport;
         }
     }

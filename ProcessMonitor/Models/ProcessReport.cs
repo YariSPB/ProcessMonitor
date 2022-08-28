@@ -5,11 +5,11 @@ namespace ProcessMonitor.Models
 {
    public  class ProcessReport
     {
-        public Guid ReportToken { get; }
+        public string ReportToken { get; }
         public IEnumerable<ProcessInfo> ProcessRecords { get; }
     public ProcessReport(IEnumerable<ProcessInfo> processRecords)
         {
-            ReportToken= Guid.NewGuid();
+            ReportToken= Guid.NewGuid().ToString();
             ProcessRecords = processRecords;
         }
     }
